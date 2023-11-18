@@ -37,7 +37,7 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
 app.use(express.json());
 
 // app.use("/api/contacts", contactsRouter);
@@ -50,6 +50,17 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
+});
+
+app.post('/register', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.create({ email, password });
+    res.status(201).json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 module.exports = app;

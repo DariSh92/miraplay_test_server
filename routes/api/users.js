@@ -4,7 +4,7 @@ const router = express.Router();
 const { validation, auth } = require("../../middlewares");
 const { passwordJoiSchema, loginJoiSchema } = require("../../models/users");
 
-router.get("/current", auth, controller.getCurrent);
+// router.get("/current", auth, controller.getCurrent);
 
 router.get("/logout", auth, controller.logout);
 
