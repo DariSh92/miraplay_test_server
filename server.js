@@ -6,7 +6,6 @@ const { DB } = process.env;
 
 
 
-// const Port = process.env.PORT;
 mongoose
   .connect(DB, {
     usenewurlparser: true,
